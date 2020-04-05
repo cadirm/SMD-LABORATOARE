@@ -1,7 +1,6 @@
 package com.example.smd_lab4;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import java.util.concurrent.BlockingQueue;
 
 
@@ -43,9 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         buttonAll.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                
+            public void onClick(View v) {                
                 BlockingQueue<Runnable> runnableQueue = new LinkedBlockingQueue<Runnable>();                
                 ThreadPoolExecutor decodeThreadPool = new ThreadPoolExecutor(
                         NUMBER_OF_CORES,
