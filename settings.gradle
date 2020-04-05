@@ -1,0 +1,2 @@
+rootProject.name='SMD-Lab4'
+include ':app'
