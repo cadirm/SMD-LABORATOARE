@@ -19,15 +19,9 @@ import android.widget.Toast;
 import java.util.concurrent.BlockingQueue;
 
 
-public class MainActivity extends AppCompatActivity {
-
-    // Sets the amount of time an idle thread waits before terminating
-    private static final int KEEP_ALIVE_TIME = 10;
-
-    // Sets the Time Unit to seconds
-    private static final TimeUnit KEEP_ALIVE_TIME_UNIT = TimeUnit.SECONDS;
-
-    // Maximum number of cores available
+public class MainActivity extends AppCompatActivity {    
+    private static final int KEEP_ALIVE_TIME = 10;    
+    private static final TimeUnit KEEP_ALIVE_TIME_UNIT = TimeUnit.SECONDS;   
     private static int NUMBER_OF_CORES = Runtime.getRuntime().availableProcessors();
 
     @Override
@@ -51,22 +45,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // A queue of Runnables
-                BlockingQueue<Runnable> runnableQueue = new LinkedBlockingQueue<Runnable>();
-
-                // Creates a thread pool manager
+                
+                BlockingQueue<Runnable> runnableQueue = new LinkedBlockingQueue<Runnable>();                
                 ThreadPoolExecutor decodeThreadPool = new ThreadPoolExecutor(
                         NUMBER_OF_CORES,
                         NUMBER_OF_CORES,
                         KEEP_ALIVE_TIME,
                         KEEP_ALIVE_TIME_UNIT,
                         runnableQueue);
-
                 Context context = MainActivity.this;
-
                 for (int i = 0; i < 10; i++) {
                     MyDownloadRunnable runnable = new MyDownloadRunnable(context, i+1);
-
                     Thread thread = new Thread(runnable);
                     decodeThreadPool.execute(thread);
                 }
@@ -76,26 +65,19 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Runnable runnable = new Runnable() {
                     @Override
                     public void run() {
-
                         // Mock up download
                         Log.d(TAG, "Downloading");
-
                         Message messageStart = handler.obtainMessage();
                         messageStart.obj = "Downloading";
                         messageStart.sendToTarget();
-
                         Calendar calendar = Calendar.getInstance();
                         long start = calendar.getTimeInMillis();
-
                         try {
                             for (int i = 0; i < 5; i++) {
-
                                 Thread.currentThread().sleep(100);
-
                                 Log.d(TAG,"Progress:" + Integer.toString(( i + 1 ) * 20 ) + "%");
                                 Message message_progress = handler.obtainMessage();
                                 message_progress.obj = "Progress: " + Integer.toString(( i + 1 ) * 20 ) + "%";
@@ -104,16 +86,12 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             Log.d(TAG, e.toString());
                         }
-
                         long stop = calendar.getTimeInMillis();
                         long time = (stop - start);
-
                     }
                 };
-
                 Thread thread = new Thread(runnable);
                 thread.start();
-
                 Message message = handler.obtainMessage();
                 message.obj = "Starting thread";
                 message.sendToTarget();
