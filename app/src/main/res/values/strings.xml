@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Lab7</string>
+    <string name="alert_dialog_msg">Application requires lock screen to be set. Would you like to set it now?</string>
+    <string name="alert_dialog_title">Application requirement</string>
+    <string name="ok_string">Ok</string>
+    <string name="cancel_string">Cancel</string>
+</resources>
